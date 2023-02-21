@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First created game</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body{
+            margin: 0 auto;
+            position: relative;
+        }
+        #player{
+            border: 1px solid;
+            border: transparent;
+            width: 50px;
+            height: 50px;
+            position: absolute; 
+        }
+
+        .btn{
+            display: flex;
+            justify-content: center;
+            width: 100px;
+            height: 50px;
+            text-align: center;
+           
+           
+        }
+        .container {
+            width: 1140px;
+        }
+
+        .btn{
+            padding-top: 10px;
+            font-size: larger;
+            text-transform:uppercase;
+            font-weight: bold;
+        }
+        #playAgainbutton {
+            position: relative;
+            
+        }
+
+        p{
+            padding-top: 20px;
+            font-size: 40px;
+            position: relative;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div id="player" onclick="changeColor(square)"></div>
+</div>
+    <p>Jums liko: <span id="timer"> </span></p>
+    <button style="background-color: black;
+    border: none;
+    width: 100px;
+    height: 50px;
+    font-weight: bold;
+    font-size: large;
+    color:white;
+    border-radius: 20px;"id="playAgainButton" onclick="start()">START!</button>
+
+
+
+    <script>
+               function rand(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+             
+    let x = 0;
+    function changeColor(){
+        let doc = document.getElementById('player')
+        let color = ['black', 'red']
+        doc.style.backgroundColor = color[x];
+        x = (x + 1) % color.length
+    }
+    setInterval(changeColor, 1000)
+
+
+    const getRandom = (min, max) => Math.floor(Math.random()*(max-min+1)+min);
+
+    const square = document.querySelector('#player');
+    setInterval(() => {
+   square.style.left = getRandom(0, 1000 - 50)+'px'; 
+   square.style.top = getRandom(0, 1000 - 50)+'px'; 
+    
+    }, 1000);
+
+
+    function start(){
+    let timeleft = 30;
+    let downloadTimer = setInterval(function(){
+  if(timeleft <= 0){
+    clearInterval(downloadTimer);
+    document.getElementById("timer").innerHTML = "Žaidimas baigtas";
+  } else {
+    document.getElementById("timer").innerHTML = timeleft + " sekundžių";
+  }
+  timeleft -= 1;
+}, 1000);
+}
+
+    </script>
+</body>
+</html>
